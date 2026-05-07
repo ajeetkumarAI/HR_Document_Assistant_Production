@@ -1,0 +1,44 @@
+# HR Document Assistant — Production Configuration
+
+app:
+  name: "HR Document Assistant"
+  version: "1.0.0"
+  debug: false
+
+llm:
+  model_name: "gpt-4o-mini"
+  temperature: 0
+
+embeddings:
+  model: "text-embedding-3-small"
+
+chunking:
+  chunk_size: 1000
+  chunk_overlap: 300
+  separators:
+    - "\n\n"
+    - "\n"
+    - "(?<=. )"
+    - " "
+    - ""
+
+retriever:
+  search_type: "mmr"
+  k: 6
+
+vector_store:
+  persist_directory: "db"
+
+upload:
+  allowed_extensions:
+    - ".pdf"
+  max_file_size_mb: 50
+  upload_directory: "data/uploads"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+
+server:
+  host: "0.0.0.0"
+  port: 8000
